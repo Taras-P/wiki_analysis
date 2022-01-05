@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<p class="display-5">
+    Information about
+    <a href = {{ page.full_url }} target="_blank"> <strong> {{page.art_name}}</strong>  </a>
+    article
+</p>
+<body>
+    <div class="card-subtitle">
+        <h5 class="my-0 font-weight-normal">Summery</h5>
+        <p class="lead">{{page.art_summary}}</p>
+    </div>
+    <div class="card-subtitle">
+        <h5 class="my-0 font-weight-normal">Number of languages </h5>
+        <p class="lead">{{page.lang_number}}</p>
+    </div>
+    <div class="card-subtitle">
+        <h5 class="my-0 font-weight-normal"> Find next number of links in Wikipedia </h5>
+        <p class="lead">{{page.back_links}}</p>
+    </div>
+    <div class="card-subtitle">
+        <h5 class="my-0 font-weight-normal"> Next languages </h5>
+        {% for link, title, short_lang, full_lang in zip(language_links['link'], language_links['title'], language_links['short_lang'], language_links['full_lang']) %}
+            <ul class="navbar-nav mr-auto">
+                <li class="lead"> {{full_lang}} (<i>{{short_lang}})</i>:
+                    <a href = {{ link }} target="_blank"> <strong> {{title}}</strong>  </a>
+                    </li>
+            </ul>
+        {% endfor %}
+
+    </div>
+
+</body>
+{% endblock %}

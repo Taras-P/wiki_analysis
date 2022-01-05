@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h3> Your Results: </h3>
+<body>
+    {% if results %}
+        {% for res in results %}
+
+           <!-- <li> <a href=#> {{ res }} </a></li> !-->
+        <li> <a href="{{ url_for('article_load', article=res) }}"> {{ res }} </a></li>
+        {% endfor %}
+    {% else %}
+    <p> page <h4> {{ articles }}</h4> doesn't exist  </p>
+    {% endif %}
+</body>
+{% endblock %}

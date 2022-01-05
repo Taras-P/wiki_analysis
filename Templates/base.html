@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!--<link rel="stylesheet" href="static\css\bootstrap-cus.css" type="text/css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/bootstrap-cus.css') }}">
+</head>
+<body class="bg-light">
+<div class="container">
+
+    <div>
+        <h1 class="display-5">Wiki analysis</h1>
+    </div>
+
+        <div class="navbar-expand navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                {% for m in menu %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{m.url}}">{{m.name}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+{% block main %}
+
+{% endblock %}
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+body {
+    background-color: #ccb ;
+    }
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: $zindex-fixed;
+}
+
+.container {
+  max-width: 750px;
+  margin: left;
+  height: 600px;
+
+  }
+
+.TopButton < div{
+    background: #ccd;
+    padding: 5px 10px;
+    border: 5px solid #ff8;
+    border-bottom: dotted #ffc;
+    margin: 10px;
+    width: 800px;
+
+}
+
+.main-links{
+    float: left;
+    background: #abb;
+    height: 10px;
+    padding: 20px;
+    width: 30%;
+    border: 5px solid #bbc;
+}
+
+.btn-text{
+    color: red;
+
+}
