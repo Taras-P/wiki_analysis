@@ -2,7 +2,29 @@
 
 {% block main %}
 
+<!--{% for short_lang, title in dict_data.items() %}
+    <h6> {{short_lang}} for {{title}} </h6>
+{% endfor %} -->
 
+    <div class="card-subtitle">
+        <h5 class="my-0 font-weight-normal"> Next languages </h5>
+        {% for link, title, short_lang, full_lang in zip(language_links['link'], language_links['title'], language_links['short_lang'], language_links['full_lang']) %}
+            <ul class="navbar-nav mr-auto">
+                <li class="lead"> {{full_lang}} (<i>{{short_lang}})</i>:
+                    <a href = {{ link }} target="_blank"> <strong> {{title}}</strong>  </a>
+                    </li>
+            </ul>
+        {% endfor %}
+
+    </div>
+
+
+
+
+
+{% for l in LLL %}
+    <h6>{{ l }}</h6>
+{% endfor %}
 
 
 {% endblock %}
