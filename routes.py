@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, session, g
 import forms
 import wikipedia
 import wikipediaapi
@@ -24,6 +24,7 @@ def search():
 
 
 @app.route('/welcome')
+@app.route('/')
 def welcome():
 	return render_template('welcome.html', menu=menu)
 
@@ -40,18 +41,34 @@ def res():
 def article_load(article):
 	article_info = ArticleInfo()
 	article_info.get_info(article)
-	l = language_links(article_info.lang_links, lang_data)
+	link_lang = language_links(article_info.lang_links, lang_data)
+	session['article'] = article_info.art_name
 	return render_template("article.html", page=article_info,
 							article_att=article_att,
 							menu=menu,
-							language_links=l,
+							language_links=link_lang,
 						   	zip=zip)
 
 
 @app.route("/full_analysis", methods=['GET', 'POST'])
-def full_analysis(article):
+def full_analysis():
+	article = session['article']
 	article_info = ArticleInfo()
 	article_info.get_info(article)
-	data = language_links(article_info.lang_links, lang_data)
-	return render_template("full_analysis.html", menu=menu)
+	lang_iterface = language_links(article_info.lang_links, lang_data)
+	dict_data = {'title': [], 'full_lang': [], 'link': []}
+	dict_info = {'back_links': []}
+	for lang_short, lang_full, title, link in zip(lang_iterface['short_lang'], lang_iterface['full_lang'], lang_iterface['title'], lang_iterface['link']):
+		article_info.language = lang_short
+		article_info.get_info(title)
+		dict_data['title'].append(title)
+		dict_data['full_lang'].append(lang_full)
+		dict_data['link'].append(link)
+		dict_info['back_links'].append(article_info.back_links)
+
+	print(dict_data)
+
+	return render_template("full_analysis.html", dict_data=dict_data,
+						   menu=menu,
+						   zip=zip)
 

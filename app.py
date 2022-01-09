@@ -8,11 +8,6 @@ env = jinja2.Environment()
 env.globals.update(zip=zip)
 
 
-@app.route("/")
-def hi():
-    return "hi!"
-
-
 from routes import *
 if __name__ == "__main__":
     app.run(debug=True)
